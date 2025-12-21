@@ -1,0 +1,5 @@
+{
+  "name": "Smart Grocery & Budget Manager",
+  "description": "A minimalist grocery list and budget tracking application with real-time spend updates and historical tracking.",
+  "requestFramePermissions": []
+}
