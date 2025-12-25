@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Tab } from '../types';
-import { ShoppingBasket, Wallet, History as HistoryIcon } from 'lucide-react';
+import { ShoppingBasket, Wallet, History as HistoryIcon, Settings } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: Tab;
@@ -16,22 +16,29 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, onTabChange }) => {
           onClick={() => onTabChange(Tab.Home)}
           className={`flex flex-col items-center gap-1 transition-all ${activeTab === Tab.Home ? 'text-emerald-600 dark:text-emerald-400 scale-105' : 'text-gray-400 dark:text-zinc-600 hover:text-gray-600 dark:hover:text-zinc-400'}`}
         >
-          <ShoppingBasket size={24} />
+          <ShoppingBasket size={22} />
           <span className="text-[10px] font-bold tracking-tight">Home</span>
         </button>
         <button
           onClick={() => onTabChange(Tab.Budget)}
           className={`flex flex-col items-center gap-1 transition-all ${activeTab === Tab.Budget ? 'text-emerald-600 dark:text-emerald-400 scale-105' : 'text-gray-400 dark:text-zinc-600 hover:text-gray-600 dark:hover:text-zinc-400'}`}
         >
-          <Wallet size={24} />
+          <Wallet size={22} />
           <span className="text-[10px] font-bold tracking-tight">Budget</span>
         </button>
         <button
           onClick={() => onTabChange(Tab.History)}
           className={`flex flex-col items-center gap-1 transition-all ${activeTab === Tab.History ? 'text-emerald-600 dark:text-emerald-400 scale-105' : 'text-gray-400 dark:text-zinc-600 hover:text-gray-600 dark:hover:text-zinc-400'}`}
         >
-          <HistoryIcon size={24} />
+          <HistoryIcon size={22} />
           <span className="text-[10px] font-bold tracking-tight">History</span>
+        </button>
+        <button
+          onClick={() => onTabChange(Tab.Settings)}
+          className={`flex flex-col items-center gap-1 transition-all ${activeTab === Tab.Settings ? 'text-emerald-600 dark:text-emerald-400 scale-105' : 'text-gray-400 dark:text-zinc-600 hover:text-gray-600 dark:hover:text-zinc-400'}`}
+        >
+          <Settings size={22} />
+          <span className="text-[10px] font-bold tracking-tight">Settings</span>
         </button>
       </div>
     </nav>

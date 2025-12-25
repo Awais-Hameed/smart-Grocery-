@@ -5,10 +5,18 @@ import { Calendar, ChevronRight, ShoppingBag, Search } from 'lucide-react';
 
 interface HistoryProps {
   history: HistoryEntry[];
+  currency: string;
 }
 
-const History: React.FC<HistoryProps> = ({ history }) => {
+const History: React.FC<HistoryProps> = ({ history, currency }) => {
   const [filter, setFilter] = useState('');
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat(navigator.language, {
+      style: 'currency',
+      currency: currency,
+    }).format(amount);
+  };
 
   const filteredHistory = history.filter(entry => {
     const dateStr = new Date(entry.date).toLocaleDateString();
@@ -47,10 +55,10 @@ const History: React.FC<HistoryProps> = ({ history }) => {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-800 dark:text-zinc-100 transition-colors">
-                    {new Date(entry.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    {new Date(entry.date).toLocaleDateString(navigator.language, { month: 'short', day: 'numeric', year: 'numeric' })}
                   </h4>
                   <p className="text-[10px] text-gray-400 dark:text-zinc-500 font-bold uppercase tracking-widest">
-                    {entry.items.length} items • ${entry.totalSpent.toFixed(2)} spent
+                    {entry.items.length} items • {formatCurrency(entry.totalSpent)} spent
                   </p>
                 </div>
               </div>

@@ -5,14 +5,21 @@ import { X } from 'lucide-react';
 
 interface AddItemModalProps {
   onClose: () => void;
+  currency: string;
   onSubmit: (data: Omit<GroceryItem, 'id' | 'isPurchased'>) => void;
   initialData?: GroceryItem | null;
 }
 
-const AddItemModal: React.FC<AddItemModalProps> = ({ onClose, onSubmit, initialData }) => {
+const AddItemModal: React.FC<AddItemModalProps> = ({ onClose, currency, onSubmit, initialData }) => {
   const [name, setName] = useState(initialData?.name ?? '');
   const [price, setPrice] = useState(initialData?.price.toString() ?? '');
   const [category, setCategory] = useState(initialData?.category ?? CATEGORIES[0]);
+
+  // Extract currency symbol
+  const currencySymbol = new Intl.NumberFormat(navigator.language, {
+    style: 'currency',
+    currency: currency,
+  }).format(0).replace(/[0-9.,\s]/g, '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +64,7 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ onClose, onSubmit, initialD
             <div className="flex flex-col gap-2">
               <label className="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest ml-1">Estimated Price</label>
               <div className="relative">
-                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 font-bold">$</span>
+                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 font-bold">{currencySymbol}</span>
                 <input
                   type="number"
                   step="0.01"
